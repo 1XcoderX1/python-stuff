@@ -1,22 +1,31 @@
 class Vehicle():
 
-    def __init__(self, name, color='silver'):
-        self.name = name
+    def __init__(self, brand_name, color):
+        self.brand_name = brand_name
         self.color = color
 
-    def getName(self):
-        return self.name
+    def get_brand_name(self):
+        return self.brand_name
 
-    def getColor(self):
-        return self.color
+class Cost():
 
+    def __init__(self, cost):
+        self.cost = cost
 
+    def get_cost(self):
+        return self.cost
 
-class Car(Vehicle):
+class Car(Vehicle, Cost):
 
-    def getColor(self):
-        self.color = "black"
-        return self.color
+    def __init__(self, brand_name, model, color, cost):
+        self.model = model
+        Vehicle.__init__(self, brand_name, color)
+        Cost.__init__(self, cost)
+        self.__engine = '5.2L V10'
 
-audi = Car("Audi R8")
-print("The name of your car is: " + audi.getName() + ' and the color is ' + audi.getColor())
+    def get_description(self):
+        return self.get_brand_name() + self.model + " is the car " + "and it's cost is " + self.cost
+
+audi = Car("Audi ", "R8", "Red", "2 cr")
+print("Car description: ", audi.get_description())
+print("Accessing private engine: ", audi._Car__engine)
